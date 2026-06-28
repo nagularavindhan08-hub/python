@@ -1,0 +1,77 @@
+import random
+import time
+import datetime
+import os
+
+# Clear screen
+os.system("cls" if os.name == "nt" else "clear")
+
+print("=" * 50)
+print("      WHAT'S FOR DINNER? DECISION MAKER")
+print("=" * 50)
+
+# Current Date & Time
+current = datetime.datetime.now()
+print("Date & Time :", current.strftime("%d-%m-%Y %I:%M:%S %p"))
+
+print("\nLoading Restaurants...")
+time.sleep(2)
+
+restaurants = {
+    "Pizza": [
+        ("Domino's", 350),
+        ("Pizza Hut", 450),
+        ("La Pino'z", 400)
+    ],
+    "Burger": [
+        ("McDonald's", 250),
+        ("Burger King", 300),
+        ("KFC", 450)
+    ],
+    "South Indian": [
+        ("A2B", 300),
+        ("Saravana Bhavan", 500),
+        ("Sangeetha", 450)
+    ],
+    "Chinese": [
+        ("Wok Express", 350),
+        ("China Town", 500),
+        ("Mainland China", 700)
+    ]
+}
+
+print("\nFood Categories")
+for item in restaurants:
+    print("-", item)
+
+food = input("\nEnter Food Category: ")
+budget = int(input("Enter Budget (₹): "))
+mode = input("Dining or Takeaway: ")
+
+if food in restaurants:
+
+    available = []
+
+    for name, price in restaurants[food]:
+        if price <= budget:
+            available.append((name, price))
+
+    if len(available) > 0:
+
+        print("\nFinding the best restaurant...")
+        time.sleep(2)
+
+        choice = random.choice(available)
+
+        print("\n***** Recommendation *****")
+        print("Restaurant :", choice[0])
+        print("Estimated Cost : ₹", choice[1])
+        print("Mode :", mode)
+
+    else:
+        print("\nNo restaurant available within your budget.")
+
+else:
+    print("\nInvalid Food Category.")
+
+print("\nThank You!")
